@@ -8,7 +8,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const errors = require('./lib/error-middlware.js');
+const userRouter = require('./route/user-route.js');
+const errors = require('./lib/error-middleware.js');
 
 dotenv.load();
 
@@ -21,7 +22,7 @@ let morganFormat = process.env.PRODUCTION ? 'common' : 'dev';
 
 app.use(cors());
 app.use(morgan(morganFormat));
-
+app.use(userRouter);
 app.use(errors);
 
 app.get('/', (req, res) => {
